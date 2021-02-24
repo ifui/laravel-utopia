@@ -2,12 +2,83 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Guard;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
+use Illuminate\Http\Response;
 use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Support\Facades\Lang;
 
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+
+    /**
+     * 返回成功信息
+     *
+     * @param array $data 数据
+     * @param string $message 提示信息
+     * @param int $status 状态码
+     * @return \Illuminate\Http\Response
+     */
+    public static function success(array $data = null, string $message = null): Response
+    {
+        if (!isset($message)) {
+            $message = Lang::get('code.success');
+        }
+
+        $response = [
+            'status' => true,
+            'message' => $message,
+        ];
+
+        if (isset($data)) {
+            $response = array_merge($response, ['data' => $data]);
+        }
+
+        return Response($response, 200);
+    }
+
+    /**
+     * 返回错误信息
+     *
+     * @param string $message 提示信息
+     * @param int $status 状态码
+     * @param string $errors 详细错误信息
+     * @return \Illuminate\Http\Response
+     */
+    public static function error(string $message = null, $errors = null): Response
+    {
+        if (!isset($message)) {
+            $message = Lang::get('code.error');
+        }
+
+        $response = [
+            'status' => false,
+            'message' => $message,
+        ];
+
+        if (isset($errors)) {
+            $response = array_merge($response, ['errors' => $errors]);
+        }
+
+        return Response($response, 400);
+    }
+
+    /**
+     * Get the token array structure.
+     *
+     * @param  string $token
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    protected function respondWithToken($token): Response
+    {
+        return $this->success([
+            'access_token' => $token,
+            'token_type' => 'bearer',
+            'expires_in' => Guard::api()->factory()->getTTL() * 60,
+        ]);
+    }
 }

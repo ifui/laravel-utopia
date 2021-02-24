@@ -2,7 +2,12 @@
 
 namespace App\Exceptions;
 
+use App\Http\Controllers\Controller;
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Support\Facades\Lang;
+use Illuminate\Validation\ValidationException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -36,5 +41,51 @@ class Handler extends ExceptionHandler
         $this->reportable(function (Throwable $e) {
             //
         });
+    }
+
+    /**
+     * Render an exception into an HTTP response.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Throwable  $e
+     * @return \Symfony\Component\HttpFoundation\Response
+     *
+     * @throws \Throwable
+     */
+    public function render($request, Throwable $e)
+    {
+
+        if ($e instanceof AuthorizationException) {
+            return $this->unauthenticated($request, $e);
+        } else if ($e instanceof ValidationException) {
+            return $this->convertValidationExceptionToResponse($e, $request);
+        }
+
+        parent::render($request, $e);
+    }
+
+    /**
+     * 重写无权限时的返回信息格式
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param AuthenticationException|AuthorizationException $exception
+     * @return void
+     */
+    protected function unauthenticated($request, $exception)
+    {
+        return Controller::error(Lang::get('code.unauthenticated'), $exception->getMessage());
+    }
+
+    /**
+     * 重写表单验证失败时的返回信息格式
+     *
+     * @param ValidationException $exception
+     * @param [type] $request
+     * @return void
+     */
+    public function convertValidationExceptionToResponse(ValidationException $exception, $request)
+    {
+
+        return Controller::error(Lang::get('code.validation_invalid'), $exception->validator->getMessageBag());
     }
 }
