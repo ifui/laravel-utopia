@@ -79,6 +79,6 @@ class Controller extends BaseController
             'access_token' => $token,
             'token_type' => 'bearer',
             'expires_in' => Guard::api()->factory()->getTTL() * 60,
-        ]);
+        ], Lang::get('code.user_login_success'));
     }
 }

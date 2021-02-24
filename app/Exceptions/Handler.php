@@ -3,11 +3,13 @@
 namespace App\Exceptions;
 
 use App\Http\Controllers\Controller;
+use Dingo\Api\Http\Request;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Validation\ValidationException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -55,10 +57,12 @@ class Handler extends ExceptionHandler
     public function render($request, Throwable $e)
     {
 
-        if ($e instanceof AuthorizationException) {
+        if ($e instanceof AuthorizationException || $e instanceof AuthenticationException) {
             return $this->unauthenticated($request, $e);
         } else if ($e instanceof ValidationException) {
             return $this->convertValidationExceptionToResponse($e, $request);
+        } else if ($e instanceof NotFoundHttpException) {
+            return $this->notFoundHttp($request);
         }
 
         parent::render($request, $e);
@@ -85,7 +89,17 @@ class Handler extends ExceptionHandler
      */
     public function convertValidationExceptionToResponse(ValidationException $exception, $request)
     {
-
         return Controller::error(Lang::get('code.validation_invalid'), $exception->validator->getMessageBag());
+    }
+
+    /**
+     * 重写没有找到页面返回信息格式
+     *
+     * @param Request $request
+     * @return void
+     */
+    public function notFoundHttp(Request $request)
+    {
+        return Controller::error(Lang::get('Not Found'), $request->url());
     }
 }
