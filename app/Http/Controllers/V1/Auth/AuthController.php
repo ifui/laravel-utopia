@@ -55,6 +55,9 @@ class AuthController extends Controller
         $user->username = $request['username'];
         $user->password = Hash::make($request['password']);
 
+        // 自动生成用户头像
+        $user->avatar = $this->create_avatar($user->username);
+
         if ($user->save()) {
             return $this->success();
         } else {

@@ -15,6 +15,7 @@
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.12",
         "laravel/tinker": "^2.5",
+        "laravolt/avatar": "^4.1",
         "overtrue/laravel-lang": "~3.0",
         "tymon/jwt-auth": "^1.0"
     },
