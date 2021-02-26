@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use Dingo\Api\Http\Request;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Auth\AuthenticationException;
+use Illuminate\Contracts\Support\Responsable;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -57,6 +59,24 @@ class Handler extends ExceptionHandler
     public function render($request, Throwable $e)
     {
 
+        if (method_exists($e, 'render') && $response = $e->render($request)) {
+            return Router::toResponse($request, $response);
+        } elseif ($e instanceof Responsable) {
+            return $e->toResponse($request);
+        }
+
+        $e = $this->prepareException($this->mapException($e));
+
+        foreach ($this->renderCallbacks as $renderCallback) {
+            if (is_a($e, $this->firstClosureParameterType($renderCallback))) {
+                $response = $renderCallback($e, $request);
+
+                if (!is_null($response)) {
+                    return $response;
+                }
+            }
+        }
+
         if ($e instanceof AuthorizationException || $e instanceof AuthenticationException) {
             return $this->unauthenticated($request, $e);
         } else if ($e instanceof ValidationException) {
@@ -65,7 +85,7 @@ class Handler extends ExceptionHandler
             return $this->notFoundHttp($request);
         }
 
-        parent::render($request, $e);
+        return $this->prepareJsonResponse($request, $e);
     }
 
     /**
@@ -101,5 +121,17 @@ class Handler extends ExceptionHandler
     public function notFoundHttp(Request $request)
     {
         return Controller::error(Lang::get('Not Found'), $request->url());
+    }
+
+    /**
+     * 重写 Prepare a JSON response for the given exception.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Throwable  $e
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function prepareJsonResponse($request, Throwable $e)
+    {
+        return Controller::error(Lang::get($e->getMessage()), $this->convertExceptionToArray($e));
     }
 }
