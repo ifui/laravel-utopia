@@ -8,6 +8,7 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\Storage;
 use Laravolt\Avatar\Facade as Avatar;
@@ -15,16 +16,18 @@ use Laravolt\Avatar\Facade as Avatar;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+    // 配置用户认证 guard 参考 config/auth.php
+    protected $guard = 'api';
 
     /**
      * 返回成功信息
      *
-     * @param array $data 数据
+     * @param array|string|integer $data 数据
      * @param string $message 提示信息
      * @param int $status 状态码
      * @return \Illuminate\Http\Response
      */
-    public static function success(array $data = null, string $message = null): Response
+    public static function success($data = null, string $message = null): Response
     {
         if (!isset($message)) {
             $message = Lang::get('code.success');
@@ -80,7 +83,7 @@ class Controller extends BaseController
         return $this->success([
             'access_token' => $token,
             'token_type' => 'bearer',
-            'expires_in' => Guard::api()->factory()->getTTL() * 60,
+            'expires_in' => $this->auth()->factory()->getTTL() * 60,
         ], Lang::get('code.user_login_success'));
     }
 
@@ -100,5 +103,15 @@ class Controller extends BaseController
         Avatar::create($username)->save($avatar_save_path);
         // 返回头像 URL
         return Storage::url($avatar_path);
+    }
+
+    /**
+     * 返回 api 认证守卫
+     *
+     * @return @var \Illuminate\Support\Facades\Auth $auth
+     */
+    public function auth()
+    {
+        return Auth::guard($this->guard);
     }
 }

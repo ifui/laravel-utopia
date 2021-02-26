@@ -22,5 +22,9 @@ $api->group($params_v1, function ($api) {
             $api->get('user', 'UserController@index');
             $api->put('user', 'UserController@update');
         });
+        // 忘记密码 > 更新密码
+        $api->post('password/update', 'PasswordController@update')->name('password.update');
+        // 发送忘记密码邮件, 访问节流限制 1 分钟 1 次
+        $api->post('password/email', 'PasswordController@email')->middleware('throttle:1,1')->name('password.email');
     });
 });

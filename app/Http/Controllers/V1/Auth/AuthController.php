@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\V1\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Http\Guard;
 use App\Http\Requests\V1\Auth\LoginRequest;
 use App\Http\Requests\V1\Auth\RegisterRequest;
 use App\Models\User;
@@ -33,7 +32,7 @@ class AuthController extends Controller
         $username = $request->username;
         $password = $request->password;
 
-        if (!$token = Guard::api()->attempt([
+        if (!$token = $this->auth()->attempt([
             'username' => $username,
             'password' => $password,
         ])) {
@@ -74,7 +73,7 @@ class AuthController extends Controller
     public function logout()
     {
         try {
-            Guard::api()->logout();
+            $this->auth()->logout();
             return $this->success();
         } catch (\Exception $e) {
             return $this->error(Lang::get('code.user_login_failed'));
@@ -88,7 +87,7 @@ class AuthController extends Controller
      */
     public function refresh()
     {
-        $token = Guard::api()->refresh();
+        $token = $this->auth()->refresh();
 
         return $this->respondWithToken($token);
     }
