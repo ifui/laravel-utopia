@@ -94,7 +94,7 @@ class Controller extends BaseController
      * @param integer $id ID
      * @return void
      */
-    protected function create_avatar(string $username)
+    public static function create_avatar(string $username)
     {
         // 头像保存路径
         $avatar_path = 'images/avatars/' . md5(time()) . '.png';

@@ -16,7 +16,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $data = AdminUser::find(Auth::user()->id)->toArray();
+        $data = AdminUser::with('roles')->find(Auth::user()->id)->toArray();
 
         return $this->success($data);
     }
