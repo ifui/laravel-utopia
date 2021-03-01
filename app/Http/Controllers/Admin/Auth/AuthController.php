@@ -1,17 +1,20 @@
 <?php
 
-namespace App\Http\Controllers\V1\Auth;
+namespace App\Http\Controllers\Admin\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\V1\Auth\LoginRequest;
-use App\Http\Requests\V1\Auth\RegisterRequest;
-use App\Models\User;
+use App\Http\Requests\Admin\Auth\LoginRequest;
+use App\Http\Requests\Admin\Auth\RegisterRequest;
+use App\Models\AdminUser;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
+    // 配置用户认证 guard 参考 config/auth.php
+    protected $guard = 'admin';
+
     /**
      * 创建实例
      *
@@ -19,7 +22,7 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login', 'register']]);
+        $this->middleware('auth:admin', ['except' => ['login', 'register']]);
     }
 
     /**
@@ -30,16 +33,31 @@ class AuthController extends Controller
      */
     public function login(LoginRequest $request)
     {
-        $username = $request->username;
+        $email = $request->email;
         $password = $request->password;
 
         if (!$token = $this->auth()->attempt([
-            'username' => $username,
+            'email' => $email,
             'password' => $password,
         ])) {
             return $this->error(Lang::get('code.user_login_failed'));
         }
         return $this->respondWithToken($token);
+    }
+
+    /**
+     * 退出登录
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function logout()
+    {
+        try {
+            $this->auth()->logout();
+            return $this->success();
+        } catch (\Exception $e) {
+            return $this->error(Lang::get('code.user_login_failed'));
+        }
     }
 
     /**
@@ -50,7 +68,7 @@ class AuthController extends Controller
      */
     public function register(RegisterRequest $request)
     {
-        $user = new User();
+        $user = new AdminUser();
 
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
@@ -69,21 +87,6 @@ class AuthController extends Controller
             return $this->success();
         } else {
             return $this->error(Lang::get('code.user_register_failed'));
-        }
-    }
-
-    /**
-     * 退出登录
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function logout()
-    {
-        try {
-            $this->auth()->logout();
-            return $this->success();
-        } catch (\Exception $e) {
-            return $this->error(Lang::get('code.user_login_failed'));
         }
     }
 

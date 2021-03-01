@@ -1,14 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\V1\Auth;
+namespace App\Http\Controllers\Admin\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\V1\Auth\PasswordEmailRequest;
-use App\Http\Requests\V1\Auth\PasswordEmailReuqest;
-use App\Http\Requests\V1\Auth\PasswordUpdateRequest;
+use App\Http\Requests\Admin\Auth\PasswordEmailRequest;
+use App\Http\Requests\Admin\Auth\PasswordUpdateRequest;
 use App\Mail\PasswordMail;
-use App\Models\User;
-use App\Redis\PasswordRedis;
+use App\Models\AdminUser;
+use App\Redis\AdminPasswordRedis;
 use Illuminate\Support\Facades\Mail;
 
 class PasswordController extends Controller
@@ -30,7 +29,7 @@ class PasswordController extends Controller
             $password = $request->password;
 
             // 检查验证码
-            $redis_code = PasswordRedis::get($email);
+            $redis_code = AdminPasswordRedis::get($email);
             if (!isset($redis_code)) {
                 return $this->error(__('Verification code expired'));
             }
@@ -39,13 +38,13 @@ class PasswordController extends Controller
             }
 
             // 执行更新操作
-            $user = new User();
+            $user = new AdminUser();
             $user->where('email', $email);
             $user->password = $password;
             $user->update();
 
             // 删除 Redis 记录
-            PasswordRedis::del($email);
+            AdminPasswordRedis::del($email);
 
             return $this->success();
 
@@ -67,7 +66,7 @@ class PasswordController extends Controller
             // 随机生成一个验证码，并存入 Redis 中
             $code = random_int(10000, 999999);
             // 设置验证码
-            PasswordRedis::setex($email, $this->expires, $code);
+            AdminPasswordRedis::setex($email, $this->expires, $code);
             // 发送邮件
             Mail::to($email)->send(new PasswordMail($code));
 

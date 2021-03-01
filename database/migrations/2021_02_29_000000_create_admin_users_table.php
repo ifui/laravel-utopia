@@ -16,10 +16,9 @@ class CreateAdminUsersTable extends Migration
         Schema::create('admin_users', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->uuid('uuid')->index();
-            $table->string('username')->comment('用户名');
-            $table->string('truename')->comment('昵称')->nullable();
+            $table->string('nickname')->comment('昵称')->nullable();
             $table->string('avatar')->comment('头像')->nullable();
-            $table->string('email')->unique()->nullable();
+            $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
