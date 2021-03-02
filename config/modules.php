@@ -43,8 +43,8 @@ return [
         ],
         'replacements' => [
             'routes/web' => ['LOWER_NAME', 'STUDLY_NAME'],
-            'routes/api' => ['LOWER_NAME', 'MODULE_NAMESPACE', 'MODULE'],
-            'routes/admin' => ['LOWER_NAME', 'MODULE_NAMESPACE', 'MODULE'],
+            'routes/api' => ['LOWER_NAME', 'MODULE_NAMESPACE', 'STUDLY_NAME'],
+            'routes/admin' => ['LOWER_NAME', 'MODULE_NAMESPACE', 'STUDLY_NAME'],
             'webpack' => ['LOWER_NAME'],
             'json' => ['LOWER_NAME', 'STUDLY_NAME', 'MODULE_NAMESPACE', 'PROVIDER_NAMESPACE'],
             'views/index' => ['LOWER_NAME'],

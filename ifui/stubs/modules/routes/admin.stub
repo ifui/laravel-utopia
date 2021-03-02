@@ -4,7 +4,7 @@ $api = app('Dingo\Api\Routing\Router');
 
 $params_v1 = [
     'version' => 'v1',
-    'namespace' => '$MODULE_NAMESPACE$\$MODULE$\Http\Controllers',
+    'namespace' => '$MODULE_NAMESPACE$\$STUDLY_NAME$\Http\Controllers',
     'prefix' => 'admin/$LOWER_NAME$',
 ];
 
