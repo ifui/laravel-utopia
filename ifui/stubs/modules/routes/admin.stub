@@ -1,0 +1,20 @@
+<?php
+
+$api = app('Dingo\Api\Routing\Router');
+
+$params_v1 = [
+    'version' => 'v1',
+    'namespace' => '$MODULE_NAMESPACE$\$MODULE$\Http\Controllers',
+    'prefix' => 'admin/$LOWER_NAME$',
+];
+
+$api->group($params_v1, function ($api) {
+    // 无需权限
+    $api->get('/', function () {
+        return 'module $LOWER_NAME$ admin is working.';
+    });
+
+    $api->group(['middleware' => 'auth:admin'], function ($api) {
+        // 需要权限
+    });
+});
