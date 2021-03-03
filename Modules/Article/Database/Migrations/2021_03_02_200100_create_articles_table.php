@@ -21,8 +21,9 @@ class CreateArticlesTable extends Migration
             $table->text('content')->comment('内容')->nullable();
             $table->string('thumbnail')->comment('缩略图')->nullable();
             $table->tinyInteger('status')->comment('发布状态 -2: 退回 -1: 草稿 0: 审核中 1: 发布')->default(-1);
+            $table->integer('order')->comment('排序')->default(0);
 
-            $table->morphs('author');
+            $table->morphs('user');
 
             $table->softDeletes();
             $table->timestamps();

@@ -5,10 +5,10 @@ namespace Modules\Article\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Modules\Article\Entities\Models\ArticleCategory;
-use Modules\Article\Http\Controllers\ArticleController;
+use Modules\Article\Http\Controllers\Controller;
 use Modules\Article\Http\Requests\Admin\ArticleCategoryRequest;
 
-class ArticleCategoryController extends ArticleController
+class ArticleCategoryController extends Controller
 {
     /**
      * Display a listing of the resource.

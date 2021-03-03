@@ -11,6 +11,11 @@ $params_v1 = [
 $api->group($params_v1, function ($api) {
 
     $api->group(['middleware' => 'auth:admin'], function ($api) {
+        // 分类
         $api->resource('categories', 'ArticleCategoryController');
+        // 内容
+        $api->resource('articles', 'ArticleController');
+        // 内容 批量删除
+        $api->delete('articles', 'ArticleController@batch');
     });
 });
