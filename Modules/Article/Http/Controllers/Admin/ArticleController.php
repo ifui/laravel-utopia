@@ -17,9 +17,9 @@ class ArticleController extends Controller
      */
     public function index(ArticleRequest $request)
     {
-        $model = Article::with('author', 'category')->filter($request->all())->paginateFilter();
+        $model = Article::with('user', 'category', 'tags')->filter($request->all())->paginateFilter();
 
-        return $this->success($model);
+        return $this->result($model);
     }
 
     /**
@@ -40,6 +40,11 @@ class ArticleController extends Controller
 
         $model->save();
 
+        // 添加标签
+        if ($request->tags) {
+            $model->retag($request->tags);
+        }
+
         return $this->success();
 
     }
@@ -51,7 +56,7 @@ class ArticleController extends Controller
      */
     public function show($id)
     {
-        $data = Article::with('author', 'category')->find($id);
+        $data = Article::with('user', 'category', 'tags')->find($id);
 
         if (isset($data)) {
             return $this->success($data);

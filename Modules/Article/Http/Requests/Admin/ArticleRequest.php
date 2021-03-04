@@ -34,6 +34,7 @@ class ArticleRequest extends FormRequest
                     'description' => 'max:240',
                     // 'content' => '',
                     'thumbnail' => 'max:240',
+                    'tags' => 'array',
                     'status' => [Rule::in([-2, -1, 0, 1])], // 发布状态 -2: 退回 -1: 草稿 0: 审核中 1: 发布
                     'order' => 'integer',
                 ];

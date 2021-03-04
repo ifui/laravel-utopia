@@ -21,6 +21,7 @@
         }
     },
     "require": {
-        "kalnoy/nestedset": "^5.0"
+        "kalnoy/nestedset": "^5.0",
+        "cviebrock/eloquent-taggable": "^8.0"
     }
 }

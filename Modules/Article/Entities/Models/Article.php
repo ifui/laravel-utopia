@@ -2,6 +2,7 @@
 
 namespace Modules\Article\Entities\Models;
 
+use Cviebrock\EloquentTaggable\Taggable; // 标签
 use EloquentFilter\Filterable; //  模型筛选
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -12,7 +13,7 @@ use Modules\Article\Entities\ModelFilters\ArticleFilter;
 
 class Article extends Model
 {
-    use HasFactory, SoftDeletes, Filterable;
+    use HasFactory, SoftDeletes, Filterable, Taggable;
 
     protected $fillable = [
         'title',
@@ -45,7 +46,7 @@ class Article extends Model
      *
      * @return MorphTo
      */
-    public function author(): MorphTo
+    public function user(): MorphTo
     {
         return $this->morphTo('user');
     }
