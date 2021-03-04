@@ -53,7 +53,11 @@ class ArticleController extends Controller
     {
         $data = Article::with('author', 'category')->find($id);
 
-        return $this->success($data);
+        if (isset($data)) {
+            return $this->success($data);
+        } else {
+            return $this->error();
+        }
     }
 
     /**
