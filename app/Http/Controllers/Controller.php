@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Guard;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -18,6 +17,21 @@ class Controller extends BaseController
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
     // 配置用户认证 guard 参考 config/auth.php
     protected $guard = 'api';
+
+    /**
+     * 自动返回信息
+     *
+     * @param any $data
+     * @return \Illuminate\Http\Response
+     */
+    public static function result($data = null)
+    {
+        if (isset($data)) {
+            return static::success($data);
+        } else {
+            return static::error();
+        }
+    }
 
     /**
      * 返回成功信息
