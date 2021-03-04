@@ -18,7 +18,7 @@ class ArticleCategoryController extends Controller
     {
         $data = ArticleCategory::filter($request->all())->defaultOrder()->get()->toTree();
 
-        return $this->success($data);
+        return $this->result($data);
     }
 
     /**
@@ -32,9 +32,11 @@ class ArticleCategoryController extends Controller
 
         $model->fill($request->all());
 
-        $model->save();
-
-        return $this->success();
+        if ($model->save()) {
+            return $this->success();
+        } else {
+            return $this->error();
+        }
     }
 
     /**
@@ -46,7 +48,7 @@ class ArticleCategoryController extends Controller
     {
         $data = ArticleCategory::defaultOrder()->descendantsAndSelf($id)->toTree();
 
-        return $this->success($data);
+        return $this->result($data);
     }
 
     /**
@@ -59,9 +61,13 @@ class ArticleCategoryController extends Controller
     {
         $model = ArticleCategory::find($id);
 
-        $model->fill($request->all())->save();
+        $model->fill($request->all());
 
-        return $this->success();
+        if ($model->save()) {
+            return $this->success();
+        } else {
+            return $this->error();
+        }
     }
 
     /**
