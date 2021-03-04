@@ -16,6 +16,10 @@ class ArticleRequest extends FormRequest
     public function rules()
     {
         switch (Request::method()) {
+            case 'GET':
+                $rules = [];
+                break;
+
             case 'DELETE':
                 $rules = [
                     'delete_ids' => 'required|array',

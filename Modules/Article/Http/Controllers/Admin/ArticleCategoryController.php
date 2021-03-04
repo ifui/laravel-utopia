@@ -14,9 +14,9 @@ class ArticleCategoryController extends Controller
      * Display a listing of the resource.
      * @return Response
      */
-    public function index()
+    public function index(ArticleCategoryRequest $request)
     {
-        $data = ArticleCategory::defaultOrder()->get()->toTree();
+        $data = ArticleCategory::filter($request->all())->defaultOrder()->get()->toTree();
 
         return $this->success($data);
     }

@@ -15,9 +15,9 @@ class ArticleController extends Controller
      * Display a listing of the resource.
      * @return Response
      */
-    public function index()
+    public function index(ArticleRequest $request)
     {
-        $model = Article::with('author', 'category')->paginate();
+        $model = Article::with('author', 'category')->filter($request->all())->paginateFilter();
 
         return $this->success($model);
     }
