@@ -34,6 +34,21 @@ class Controller extends BaseController
     }
 
     /**
+     * 简单返回状态信息 不返回任何参数
+     *
+     * @param boolean $boolean
+     * @return \Illuminate\Http\Response
+     */
+    public static function resultStatus(bool $boolean = true)
+    {
+        if ((bool) $boolean) {
+            return static::success();
+        } else {
+            return static::error();
+        }
+    }
+
+    /**
      * 返回成功信息
      *
      * @param array|string|integer $data 数据
