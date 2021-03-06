@@ -16,7 +16,7 @@ class ArticleController extends Controller
      */
     public function index(ArticleRequest $request)
     {
-        $model = Article::with('author', 'category')->filter($request->all())->paginateFilter();
+        $model = Article::with('user:id,email,nickname', 'category', 'tags')->filter($request->all())->paginateFilter();
 
         return $this->result($model);
     }
@@ -38,7 +38,7 @@ class ArticleController extends Controller
      */
     public function show($id)
     {
-        $data = Article::with('author', 'category')->find($id);
+        $data = Article::with('user:id,email,nickname', 'category', 'tags')->find($id);
 
         return $this->result($data);
     }

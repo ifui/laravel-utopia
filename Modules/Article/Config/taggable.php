@@ -6,26 +6,26 @@ return [
      * List of characters that can delimit the tags passed to the
      * tag() / untag() / etc. functions.
      */
-    'delimiters'           => ',;',
+    'delimiters' => ',;',
 
     /**
      * Character used to delimit tag lists returned in the
      * tagList, tagListNormalized, etc. attributes.
      */
-    'glue'                 => ',',
+    'glue' => ',',
 
     /**
      * Method used to "normalize" tag names.  Can either be a global function name,
      * a closure function, or a callable, e.g. ['Classname', 'method'].
      */
-    'normalizer'           => 'mb_strtolower',
+    'normalizer' => 'mb_strtolower',
 
     /**
      * The database connection to use for the Tag model and associated tables.
      * By default, we use the default database connection, but this can be defined
      * so that all the tag-related tables are stored in a different connection.
      */
-    'connection'           => null,
+    'connection' => null,
 
     /**
      * How to handle passing empty values to the scope queries.  When set to false,
@@ -52,22 +52,24 @@ return [
      * to get a collection of all the Posts that are tagged "Apple".
      */
 
-    'taggedModels' => [],
+    'taggedModels' => [
+        'article' => \Modules\Article\Entities\Models\Article::class,
+    ],
 
     /**
      * The model used to store the tags in the database.  You can
      * create your own class that extends the package's Tag model,
      * then update the configuration below.
      */
-    'model'  => \Cviebrock\EloquentTaggable\Models\Tag::class,
-
+    'model' => \Modules\Article\Entities\Models\TaggableTag::class,
 
     /**
      * The tables used to store the tags in the database.  You can
      * publish the package's migrations and use custom names.
      */
     'tables' => [
-        'taggable_tags'      => 'taggable_tags',
+        'taggable_tags' => 'taggable_tags',
         'taggable_taggables' => 'taggable_taggables',
-    ]
+    ],
+    'hash' => 'ss',
 ];

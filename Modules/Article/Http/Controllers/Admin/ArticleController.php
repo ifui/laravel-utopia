@@ -17,7 +17,7 @@ class ArticleController extends Controller
      */
     public function index(ArticleRequest $request)
     {
-        $model = Article::with('user', 'category', 'tags')->filter($request->all())->paginateFilter();
+        $model = Article::filter($request->all())->paginateFilter();
 
         return $this->result($model);
     }
@@ -56,13 +56,9 @@ class ArticleController extends Controller
      */
     public function show($id)
     {
-        $data = Article::with('user', 'category', 'tags')->find($id);
+        $data = Article::find($id);
 
-        if (isset($data)) {
-            return $this->success($data);
-        } else {
-            return $this->error();
-        }
+        return $this->result($data);
     }
 
     /**
@@ -83,6 +79,11 @@ class ArticleController extends Controller
 
         $model->save();
 
+        // 添加标签
+        if ($request->tags) {
+            $model->retag($request->tags);
+        }
+
         return $this->success();
     }
 
@@ -99,11 +100,7 @@ class ArticleController extends Controller
             return $this->error(__('article::lang.The resource was not found'));
         }
 
-        if ($model->delete()) {
-            return $this->success();
-        } else {
-            return $this->error();
-        }
+        return $this->resultStatus($model->delete());
     }
 
     /**
@@ -115,10 +112,6 @@ class ArticleController extends Controller
     {
         $delete_ids = $request->delete_ids;
 
-        if (Article::destroy($delete_ids)) {
-            return $this->success();
-        } else {
-            return $this->error();
-        }
+        return $this->resultStatus(Article::destroy($delete_ids));
     }
 }

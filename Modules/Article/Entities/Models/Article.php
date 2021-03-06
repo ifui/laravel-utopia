@@ -31,6 +31,12 @@ class Article extends Model
         'article_category_id',
     ];
 
+    protected $with = [
+        'user:id,email,nickname',
+        'category',
+        'tags',
+    ];
+
     /**
      * 重写模型筛选目录路径
      *

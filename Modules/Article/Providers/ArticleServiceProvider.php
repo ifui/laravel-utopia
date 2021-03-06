@@ -2,8 +2,8 @@
 
 namespace Modules\Article\Providers;
 
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Database\Eloquent\Factory;
 
 class ArticleServiceProvider extends ServiceProvider
 {
@@ -53,6 +53,12 @@ class ArticleServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(
             module_path($this->moduleName, 'Config/config.php'), $this->moduleNameLower
         );
+
+        // 覆盖 taggable config
+        $this->mergeConfigFrom(
+            module_path($this->moduleName, 'Config/taggable.php'), 'taggable_copy'
+        );
+        Config::set('taggable', config('taggable_copy'));
     }
 
     /**
@@ -67,7 +73,7 @@ class ArticleServiceProvider extends ServiceProvider
         $sourcePath = module_path($this->moduleName, 'Resources/views');
 
         $this->publishes([
-            $sourcePath => $viewPath
+            $sourcePath => $viewPath,
         ], ['views', $this->moduleNameLower . '-module-views']);
 
         $this->loadViewsFrom(array_merge($this->getPublishableViewPaths(), [$sourcePath]), $this->moduleNameLower);

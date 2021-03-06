@@ -17,5 +17,9 @@ $api->group($params_v1, function ($api) {
         $api->resource('articles', 'ArticleController');
         // 内容 批量删除
         $api->delete('articles', 'ArticleController@batch');
+        // 标签
+        $api->resource('tags', 'TagController');
+        $api->delete('tags', 'TagController@batch');
+
     });
 });
