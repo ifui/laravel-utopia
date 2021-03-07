@@ -29,12 +29,18 @@ class Article extends Model
         'user_id',
         'user_type',
         'article_category_id',
+        'deleted_at',
     ];
 
     protected $with = [
         'user:id,email,nickname',
         'category',
         'tags',
+    ];
+
+    // 追加模型字段
+    protected $appends = [
+        'visits',
     ];
 
     /**
@@ -65,6 +71,16 @@ class Article extends Model
     public function category(): BelongsTo
     {
         return $this->belongsTo(ArticleCategory::class, 'article_category_id', 'id');
+    }
+
+    /**
+     * 添加 visits 字段 代表访问次数
+     *
+     * @return int
+     */
+    public function getVisitsAttribute()
+    {
+        return visits($this)->count();
     }
 
 }

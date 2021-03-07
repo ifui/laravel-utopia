@@ -39,6 +39,8 @@ class ArticleController extends Controller
     public function show($id)
     {
         $data = Article::find($id);
+        // 添加1次访问次数
+        visits($data)->increment();
 
         return $this->result($data);
     }

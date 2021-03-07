@@ -22,6 +22,7 @@
     },
     "require": {
         "kalnoy/nestedset": "^5.0",
-        "cviebrock/eloquent-taggable": "^8.0"
+        "cviebrock/eloquent-taggable": "^8.0",
+        "awssat/laravel-visits": "^3.0"
     }
 }

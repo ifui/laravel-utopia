@@ -2,6 +2,7 @@
 
 namespace Modules\Article\Providers;
 
+use Illuminate\Contracts\Foundation\CachesConfiguration;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\ServiceProvider;
 
@@ -55,10 +56,39 @@ class ArticleServiceProvider extends ServiceProvider
         );
 
         // 覆盖 taggable config
-        $this->mergeConfigFrom(
-            module_path($this->moduleName, 'Config/taggable.php'), 'taggable_copy'
+        $this->mergeConfigLocal(
+            module_path($this->moduleName, 'Config/taggable.php'), 'taggable'
         );
-        Config::set('taggable', config('taggable_copy'));
+
+        // 覆盖 visits config
+        $this->mergeConfigLocal(
+            module_path($this->moduleName, 'Config/visits.php'), 'visits'
+        );
+
+        // 追加 database config
+        $this->mergeConfigLocal(
+            module_path($this->moduleName, 'Config/database.php'), 'database_copy'
+        );
+        Config::set('database.redis.laravel-visits', config('database_copy.redis.laravel-visits'));
+
+    }
+
+    /**
+     * Merge the given configuration with the existing configuration.
+     *
+     * @param  string  $path
+     * @param  string  $key
+     * @return void
+     */
+    protected function mergeConfigLocal($path, $key)
+    {
+        if (!($this->app instanceof CachesConfiguration && $this->app->configurationIsCached())) {
+            $config = $this->app->make('config');
+
+            $config->set($key, array_merge(
+                $config->get($key, []), require $path
+            ));
+        }
     }
 
     /**
