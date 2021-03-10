@@ -33,13 +33,14 @@ class AuthController extends Controller
      */
     public function login(LoginRequest $request)
     {
-        $email = $request->email;
-        $password = $request->password;
+        $loginForm = [
+            'password' => $request->password,
+        ];
 
-        if (!$token = $this->auth()->attempt([
-            'email' => $email,
-            'password' => $password,
-        ])) {
+        $request->email ? $loginForm = array_merge($loginForm, ['email' => $request->email]) : null;
+        $request->username ? $loginForm = array_merge($loginForm, ['username' => $request->username]) : null;
+
+        if (!$token = $this->auth()->attempt($loginForm)) {
             return $this->error(Lang::get('code.user_login_failed'));
         }
         return $this->respondWithToken($token);

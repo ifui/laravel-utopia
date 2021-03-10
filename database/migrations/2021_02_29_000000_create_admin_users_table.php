@@ -14,11 +14,12 @@ class CreateAdminUsersTable extends Migration
     public function up()
     {
         Schema::create('admin_users', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->id();
             $table->uuid('uuid')->index();
+            $table->string('username')->unique()->comment('用户名');
+            $table->string('email')->unique()->nullable();
             $table->string('nickname')->comment('昵称')->nullable();
             $table->string('avatar')->comment('头像')->nullable();
-            $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

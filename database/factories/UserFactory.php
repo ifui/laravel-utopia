@@ -26,6 +26,7 @@ class UserFactory extends Factory
         return [
             'uuid' => (string) Str::uuid(),
             'nickname' => $this->faker->name,
+            'username' => $this->faker->name,
             'email' => $this->faker->unique()->safeEmail,
             'email_verified_at' => now(),
             'password' => Hash::make('password'), // password
