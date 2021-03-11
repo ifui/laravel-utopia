@@ -11,7 +11,7 @@ $params_v1 = [
 $api->group($params_v1, function ($api) {
     $api->group(['namespace' => 'Auth'], function ($api) {
         // 登录
-        $api->get('login', 'AuthController@login')->name('admin.login');
+        $api->post('login', 'AuthController@login')->name('admin.login');
         // 注册用户
         $api->post('register', 'AuthController@register')->name('admin.register');
         // 退出登录
