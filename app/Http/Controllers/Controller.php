@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AdminUser;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -109,11 +110,17 @@ class Controller extends BaseController
      */
     protected function respondWithToken($token): Response
     {
-        return $this->success([
+        $user_id = $this->auth()->setToken($token)->user()->id;
+
+        $user = AdminUser::with('roles')->find($user_id)->toArray();
+
+        $token_response = [
             'access_token' => $token,
             'token_type' => 'bearer',
             'expires_in' => $this->auth()->factory()->getTTL() * 60,
-        ], Lang::get('code.user_login_success'));
+        ];
+
+        return $this->success(array_merge($user, $token_response), Lang::get('code.user_login_success'));
     }
 
     /**

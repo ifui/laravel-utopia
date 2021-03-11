@@ -18,9 +18,11 @@ class CreateUsersTable extends Migration
             $table->uuid('uuid')->index();
             $table->string('username')->unique()->comment('用户名');
             $table->string('email')->unique()->nullable();
+            $table->char('phone', 11)->unique()->nullable()->comment('手机号');
             $table->string('nickname')->comment('昵称')->nullable();
             $table->string('avatar')->comment('头像')->nullable();
             $table->timestamp('email_verified_at')->nullable();
+            $table->timestamp('phone_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();

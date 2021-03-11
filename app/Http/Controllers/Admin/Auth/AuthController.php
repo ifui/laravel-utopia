@@ -6,8 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Auth\LoginRequest;
 use App\Http\Requests\Admin\Auth\RegisterRequest;
 use App\Models\AdminUser;
+use App\Rules\Phone;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Lang;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
 class AuthController extends Controller
@@ -27,6 +29,7 @@ class AuthController extends Controller
 
     /**
      * 登录用户
+     * 支持 username email phone 三种方式登录
      *
      * @param LoginRequest $request
      * @return \Illuminate\Http\Response
@@ -36,9 +39,22 @@ class AuthController extends Controller
         $loginForm = [
             'password' => $request->password,
         ];
+        // 验证邮箱
+        $validator_email = Validator::make($request->all(), [
+            'username' => 'email',
+        ]);
+        // 验证手机号
+        $validator_phone = Validator::make($request->all(), [
+            'username' => new Phone(),
+        ]);
 
-        $request->email ? $loginForm = array_merge($loginForm, ['email' => $request->email]) : null;
-        $request->username ? $loginForm = array_merge($loginForm, ['username' => $request->username]) : null;
+        !$validator_email->fails() ? $loginForm = array_merge($loginForm, ['email' => $request->username]) : null;
+        !$validator_phone->fails() ? $loginForm = array_merge($loginForm, ['phone' => $request->username]) : null;
+
+        // 如果两者验证都不通过
+        if ($validator_email->fails() && $validator_phone->fails()) {
+            $loginForm = array_merge($loginForm, ['username' => $request->username]);
+        }
 
         if (!$token = $this->auth()->attempt($loginForm)) {
             return $this->error(Lang::get('code.user_login_failed'));
