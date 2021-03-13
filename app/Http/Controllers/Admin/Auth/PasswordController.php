@@ -31,10 +31,10 @@ class PasswordController extends Controller
             // 检查验证码
             $redis_code = AdminPasswordRedis::get($email);
             if (!isset($redis_code)) {
-                return $this->error(__('Verification code expired'));
+                return $this->error(__('Verification code expired'), 422);
             }
             if ($redis_code !== $code) {
-                return $this->error(__('Invalid verification code'));
+                return $this->error(__('Invalid verification code'), 422);
             }
 
             // 执行更新操作

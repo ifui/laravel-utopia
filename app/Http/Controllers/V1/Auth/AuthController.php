@@ -7,7 +7,6 @@ use App\Http\Requests\V1\Auth\LoginRequest;
 use App\Http\Requests\V1\Auth\RegisterRequest;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Str;
 
 class AuthController extends Controller
@@ -37,7 +36,7 @@ class AuthController extends Controller
             'username' => $username,
             'password' => $password,
         ])) {
-            return $this->error(Lang::get('code.user_login_failed'));
+            return $this->error(__('error.user_login_failed'), 422);
         }
         return $this->respondWithToken($token);
     }
@@ -68,7 +67,7 @@ class AuthController extends Controller
         if ($user->save()) {
             return $this->success();
         } else {
-            return $this->error(Lang::get('code.user_register_failed'));
+            return $this->error(__('error.user_register_failed'), 422);
         }
     }
 
@@ -83,7 +82,7 @@ class AuthController extends Controller
             $this->auth()->logout();
             return $this->success();
         } catch (\Exception $e) {
-            return $this->error(Lang::get('code.user_login_failed'));
+            return $this->error(__('error.user_login_failed'));
         }
     }
 

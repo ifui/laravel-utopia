@@ -51,54 +51,42 @@ class Controller extends BaseController
 
     /**
      * 返回成功信息
+     * 参考阿里
      *
      * @param array|string|integer $data 数据
-     * @param string $message 提示信息
-     * @param int $status 状态码
+     * @param int $successCode 状态码
      * @return \Illuminate\Http\Response
      */
-    public static function success($data = null, string $message = null): Response
+    public static function success($data = null, int $successCode = 200): Response
     {
-        if (!isset($message)) {
-            $message = Lang::get('code.success');
-        }
-
         $response = [
-            'status' => true,
-            'message' => $message,
+            'success' => true,
         ];
 
         if (isset($data)) {
             $response = array_merge($response, ['data' => $data]);
         }
 
-        return Response($response, 200);
+        return Response($response, $successCode);
     }
 
     /**
      * 返回错误信息
+     * 参考阿里
      *
-     * @param string $message 提示信息
-     * @param int $status 状态码
-     * @param string $errors 详细错误信息
+     * @var string|array|int $errorMessage 错误信息
+     * @param int $errorCode 状态码
      * @return \Illuminate\Http\Response
      */
-    public static function error(string $message = null, $errors = null): Response
+    public static function error($errorMessage = null, int $errorCode = 400): Response
     {
-        if (!isset($message)) {
-            $message = Lang::get('code.error');
-        }
-
         $response = [
-            'status' => false,
-            'message' => $message,
+            'success' => false,
+            'errorCode' => $errorCode,
+            'errorMessage' => $errorMessage ? $errorMessage : Lang::get(`code.$errorCode`),
         ];
 
-        if (isset($errors)) {
-            $response = array_merge($response, ['errors' => $errors]);
-        }
-
-        return Response($response, 400);
+        return Response($response, $errorCode);
     }
 
     /**

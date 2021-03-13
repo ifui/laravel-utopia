@@ -8,7 +8,6 @@ use App\Http\Requests\Admin\Auth\RegisterRequest;
 use App\Models\AdminUser;
 use App\Rules\Phone;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
@@ -57,7 +56,7 @@ class AuthController extends Controller
         }
 
         if (!$token = $this->auth()->attempt($loginForm)) {
-            return $this->error(Lang::get('code.user_login_failed'));
+            return $this->error(trans('error.user_login_failed'), 422);
         }
         return $this->respondWithToken($token);
     }
@@ -73,7 +72,7 @@ class AuthController extends Controller
             $this->auth()->logout();
             return $this->success();
         } catch (\Exception $e) {
-            return $this->error(Lang::get('code.user_login_failed'));
+            return $this->error(trans('error.user_login_failed'));
         }
     }
 
@@ -103,7 +102,7 @@ class AuthController extends Controller
         if ($user->save()) {
             return $this->success();
         } else {
-            return $this->error(Lang::get('code.user_register_failed'));
+            return $this->error(trans('error.user_register_failed'), 422);
         }
     }
 
