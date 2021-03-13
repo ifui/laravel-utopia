@@ -97,7 +97,7 @@ class Handler extends ExceptionHandler
      */
     protected function unauthenticated($request, $exception)
     {
-        return Controller::error(Lang::get('code.unauthenticated'), $exception->getMessage());
+        return Controller::errorException(Lang::get('error.unauthenticated'), $exception->getMessage(), 401);
     }
 
     /**
@@ -109,7 +109,7 @@ class Handler extends ExceptionHandler
      */
     public function convertValidationExceptionToResponse(ValidationException $exception, $request)
     {
-        return Controller::error(Lang::get('code.validation_invalid'), $exception->validator->getMessageBag());
+        return Controller::errorException(Lang::get('error.validation_invalid'), $exception->validator->getMessageBag(), 422);
     }
 
     /**
@@ -120,7 +120,7 @@ class Handler extends ExceptionHandler
      */
     public function notFoundHttp(Request $request)
     {
-        return Controller::error(Lang::get('Not Found'), $request->url());
+        return Controller::errorException(Lang::get('Not Found'), $request->url(), 404);
     }
 
     /**
@@ -132,6 +132,6 @@ class Handler extends ExceptionHandler
      */
     public function prepareJsonResponse($request, Throwable $e)
     {
-        return Controller::error(Lang::get($e->getMessage()), $this->convertExceptionToArray($e));
+        return Controller::errorException(Lang::get($e->getMessage()), $this->convertExceptionToArray($e), 500);
     }
 }

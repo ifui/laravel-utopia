@@ -74,7 +74,7 @@ class Controller extends BaseController
      * 返回错误信息
      * 参考阿里
      *
-     * @var string|array|int $errorMessage 错误信息
+     * @param mixed|null $errorMessage 错误信息
      * @param int $errorCode 状态码
      * @return \Illuminate\Http\Response
      */
@@ -84,6 +84,26 @@ class Controller extends BaseController
             'success' => false,
             'errorCode' => $errorCode,
             'errorMessage' => $errorMessage ? $errorMessage : Lang::get(`code.$errorCode`),
+        ];
+
+        return Response($response, $errorCode);
+    }
+
+    /**
+     * 返回错误信息
+     * 参考阿里
+     *
+     * @param mixed|null $errorMessage 错误信息
+     * @param int $errorCode 状态码
+     * @return \Illuminate\Http\Response
+     */
+    public static function errorException($errorMessage = null, $errorData = null, int $errorCode = 400): Response
+    {
+        $response = [
+            'success' => false,
+            'errorCode' => $errorCode,
+            'errorMessage' => $errorMessage ? $errorMessage : Lang::get(`code.$errorCode`),
+            'errorData' => $errorData,
         ];
 
         return Response($response, $errorCode);
