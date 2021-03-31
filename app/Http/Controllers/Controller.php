@@ -22,7 +22,7 @@ class Controller extends BaseController
     /**
      * 自动返回信息
      *
-     * @param any $data
+     * @param mixed|null $data
      * @return \Illuminate\Http\Response
      */
     public static function result($data = null)
@@ -53,7 +53,7 @@ class Controller extends BaseController
      * 返回成功信息
      * 参考阿里
      *
-     * @param array|string|integer $data 数据
+     * @param mixed|null $data 数据
      * @param int $successCode 状态码
      * @return \Illuminate\Http\Response
      */
@@ -128,7 +128,7 @@ class Controller extends BaseController
             'expires_in' => $this->auth()->factory()->getTTL() * 60,
         ];
 
-        return $this->success(array_merge($user, $token_response), Lang::get('code.user_login_success'));
+        return $this->success(array_merge($user, $token_response), 201);
     }
 
     /**

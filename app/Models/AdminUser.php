@@ -31,7 +31,10 @@ class AdminUser extends Authenticatable implements JWTSubject
     protected $hidden = [
         'password',
         'remember_token',
+        'roles',
     ];
+
+    protected $appends = ['role'];
 
     /**
      * The attributes that should be cast to native types.
@@ -60,5 +63,14 @@ class AdminUser extends Authenticatable implements JWTSubject
     public function getJWTCustomClaims()
     {
         return [];
+    }
+
+    // 返回处理后的角色数据
+    public function getRoleAttribute()
+    {
+        $role = $this->roles->map(function ($item, $key) {
+            return $item->name;
+        });
+        return $role;
     }
 }
