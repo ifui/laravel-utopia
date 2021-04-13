@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6edd591490e82185575175f2488a7614",
+    "content-hash": "94a5740e2cb143849cb1d6061efb55b8",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -2897,6 +2897,90 @@
                 }
             ],
             "time": "2020-07-20T17:29:33+00:00"
+        },
+        {
+            "name": "plank/laravel-mediable",
+            "version": "5.0.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/plank/laravel-mediable.git",
+                "reference": "f727ce0907a9939d64f66d19a60fe483af02c045"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/plank/laravel-mediable/zipball/f727ce0907a9939d64f66d19a60fe483af02c045",
+                "reference": "f727ce0907a9939d64f66d19a60fe483af02c045",
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "require": {
+                "ext-fileinfo": "*",
+                "guzzlehttp/guzzle": "^6.5|^7.1",
+                "illuminate/database": ">6.0",
+                "illuminate/filesystem": ">6.0",
+                "illuminate/support": ">6.0",
+                "intervention/image": "^2.5",
+                "league/flysystem": "^1.0.23",
+                "php": ">=7.3.0",
+                "psr/http-message": "^1.0"
+            },
+            "require-dev": {
+                "aws/aws-sdk-php": "^3.166.0",
+                "doctrine/dbal": "^2.11",
+                "guzzlehttp/promises": "^1.4",
+                "laravel/legacy-factories": "^1.0.4",
+                "league/flysystem-aws-s3-v3": "^1.0.23",
+                "mockery/mockery": "^1.4.2",
+                "orchestra/testbench": "^5.9|^6.6",
+                "php-coveralls/php-coveralls": "^2.4",
+                "phpunit/phpunit": "^9.5",
+                "vlucas/phpdotenv": "^4.0|^5.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Plank\\Mediable\\MediableServiceProvider"
+                    ],
+                    "aliases": {
+                        "MediaUploader": "Plank\\Mediable\\Facades\\MediaUploader",
+                        "ImageManipulator": "Plank\\Mediable\\Facades\\ImageManipulator"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Plank\\Mediable\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Sean Fraser",
+                    "email": "sean@plankdesign.com"
+                }
+            ],
+            "description": "A package for easily uploading and attaching media files to models with Laravel",
+            "keywords": [
+                "eloquent",
+                "image",
+                "laravel",
+                "media",
+                "uploader"
+            ],
+            "support": {
+                "issues": "https://github.com/plank/laravel-mediable/issues",
+                "source": "https://github.com/plank/laravel-mediable/tree/5.0.7"
+            },
+            "time": "2020-12-12T02:51:24+00:00"
         },
         {
             "name": "predis/predis",
