@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "94a5740e2cb143849cb1d6061efb55b8",
+    "content-hash": "d8c241be50fce7805262528ec0597086",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -1992,6 +1992,77 @@
             "time": "2020-01-24T23:17:29+00:00"
         },
         {
+            "name": "league/glide",
+            "version": "1.7.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/thephpleague/glide.git",
+                "reference": "ae5e26700573cb678919d28e425a8b87bc71c546"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/thephpleague/glide/zipball/ae5e26700573cb678919d28e425a8b87bc71c546",
+                "reference": "ae5e26700573cb678919d28e425a8b87bc71c546",
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "require": {
+                "intervention/image": "^2.4",
+                "league/flysystem": "^1.0",
+                "php": "^7.2|^8.0",
+                "psr/http-message": "^1.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "^1.3.3",
+                "phpunit/php-token-stream": "^3.1|^4.0",
+                "phpunit/phpunit": "^8.5|^9.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.1-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "League\\Glide\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jonathan Reinink",
+                    "email": "jonathan@reinink.ca",
+                    "homepage": "http://reinink.ca"
+                }
+            ],
+            "description": "Wonderfully easy on-demand image manipulation library with an HTTP based API.",
+            "homepage": "http://glide.thephpleague.com",
+            "keywords": [
+                "ImageMagick",
+                "editing",
+                "gd",
+                "image",
+                "imagick",
+                "league",
+                "manipulation",
+                "processing"
+            ],
+            "support": {
+                "issues": "https://github.com/thephpleague/glide/issues",
+                "source": "https://github.com/thephpleague/glide/tree/1.7.0"
+            },
+            "time": "2020-11-05T17:34:03+00:00"
+        },
+        {
             "name": "league/mime-type-detection",
             "version": "1.7.0",
             "source": {
@@ -2052,6 +2123,83 @@
                 }
             ],
             "time": "2021-01-18T20:58:21+00:00"
+        },
+        {
+            "name": "maennchen/zipstream-php",
+            "version": "2.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/maennchen/ZipStream-PHP.git",
+                "reference": "c4c5803cc1f93df3d2448478ef79394a5981cc58"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/maennchen/ZipStream-PHP/zipball/c4c5803cc1f93df3d2448478ef79394a5981cc58",
+                "reference": "c4c5803cc1f93df3d2448478ef79394a5981cc58",
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "require": {
+                "myclabs/php-enum": "^1.5",
+                "php": ">= 7.1",
+                "psr/http-message": "^1.0",
+                "symfony/polyfill-mbstring": "^1.0"
+            },
+            "require-dev": {
+                "ext-zip": "*",
+                "guzzlehttp/guzzle": ">= 6.3",
+                "mikey179/vfsstream": "^1.6",
+                "phpunit/phpunit": ">= 7.5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "ZipStream\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Paul Duncan",
+                    "email": "pabs@pablotron.org"
+                },
+                {
+                    "name": "Jonatan Männchen",
+                    "email": "jonatan@maennchen.ch"
+                },
+                {
+                    "name": "Jesse Donat",
+                    "email": "donatj@gmail.com"
+                },
+                {
+                    "name": "András Kolesár",
+                    "email": "kolesar@kolesar.hu"
+                }
+            ],
+            "description": "ZipStream is a library for dynamically streaming dynamic zip files from PHP without writing to the disk at all on the server.",
+            "keywords": [
+                "stream",
+                "zip"
+            ],
+            "support": {
+                "issues": "https://github.com/maennchen/ZipStream-PHP/issues",
+                "source": "https://github.com/maennchen/ZipStream-PHP/tree/master"
+            },
+            "funding": [
+                {
+                    "url": "https://opencollective.com/zipstream",
+                    "type": "open_collective"
+                }
+            ],
+            "time": "2020-05-30T13:11:16+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -2154,6 +2302,72 @@
                 }
             ],
             "time": "2021-07-14T11:56:39+00:00"
+        },
+        {
+            "name": "myclabs/php-enum",
+            "version": "1.8.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/myclabs/php-enum.git",
+                "reference": "b942d263c641ddb5190929ff840c68f78713e937"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/myclabs/php-enum/zipball/b942d263c641ddb5190929ff840c68f78713e937",
+                "reference": "b942d263c641ddb5190929ff840c68f78713e937",
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "require": {
+                "ext-json": "*",
+                "php": "^7.3 || ^8.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^9.5",
+                "squizlabs/php_codesniffer": "1.*",
+                "vimeo/psalm": "^4.6.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "MyCLabs\\Enum\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "PHP Enum contributors",
+                    "homepage": "https://github.com/myclabs/php-enum/graphs/contributors"
+                }
+            ],
+            "description": "PHP Enum implementation",
+            "homepage": "http://github.com/myclabs/php-enum",
+            "keywords": [
+                "enum"
+            ],
+            "support": {
+                "issues": "https://github.com/myclabs/php-enum/issues",
+                "source": "https://github.com/myclabs/php-enum/tree/1.8.3"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/mnapoli",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/myclabs/php-enum",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2021-07-05T08:18:36+00:00"
         },
         {
             "name": "namshi/jose",
@@ -2864,90 +3078,6 @@
                 }
             ],
             "time": "2020-07-20T17:29:33+00:00"
-        },
-        {
-            "name": "plank/laravel-mediable",
-            "version": "5.1.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/plank/laravel-mediable.git",
-                "reference": "c26f8b3ebb2e1d3db8202dec83b3135f77ec4b88"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/plank/laravel-mediable/zipball/c26f8b3ebb2e1d3db8202dec83b3135f77ec4b88",
-                "reference": "c26f8b3ebb2e1d3db8202dec83b3135f77ec4b88",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
-            },
-            "require": {
-                "ext-fileinfo": "*",
-                "guzzlehttp/guzzle": "^6.5|^7.1",
-                "illuminate/database": ">6.0",
-                "illuminate/filesystem": ">6.0",
-                "illuminate/support": ">6.0",
-                "intervention/image": "^2.5",
-                "league/flysystem": "^1.0.23",
-                "php": ">=7.3.0",
-                "psr/http-message": "^1.0"
-            },
-            "require-dev": {
-                "aws/aws-sdk-php": "^3.166.0",
-                "doctrine/dbal": "^2.11",
-                "guzzlehttp/promises": "^1.4",
-                "laravel/legacy-factories": "^1.0.4",
-                "league/flysystem-aws-s3-v3": "^1.0.23",
-                "mockery/mockery": "^1.4.2",
-                "orchestra/testbench": "^5.9|^6.6",
-                "php-coveralls/php-coveralls": "^2.4",
-                "phpunit/phpunit": "^9.5",
-                "vlucas/phpdotenv": "^4.0|^5.0"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Plank\\Mediable\\MediableServiceProvider"
-                    ],
-                    "aliases": {
-                        "MediaUploader": "Plank\\Mediable\\Facades\\MediaUploader",
-                        "ImageManipulator": "Plank\\Mediable\\Facades\\ImageManipulator"
-                    }
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Plank\\Mediable\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Sean Fraser",
-                    "email": "sean@plankdesign.com"
-                }
-            ],
-            "description": "A package for easily uploading and attaching media files to models with Laravel",
-            "keywords": [
-                "eloquent",
-                "image",
-                "laravel",
-                "media",
-                "uploader"
-            ],
-            "support": {
-                "issues": "https://github.com/plank/laravel-mediable/issues",
-                "source": "https://github.com/plank/laravel-mediable/tree/5.1.1"
-            },
-            "time": "2021-04-30T02:05:55+00:00"
         },
         {
             "name": "predis/predis",
@@ -3790,6 +3920,251 @@
             "time": "2020-08-18T17:17:46+00:00"
         },
         {
+            "name": "spatie/image",
+            "version": "1.10.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/image.git",
+                "reference": "63a963d0200fb26f2564bf7201fc7272d9b22933"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/image/zipball/63a963d0200fb26f2564bf7201fc7272d9b22933",
+                "reference": "63a963d0200fb26f2564bf7201fc7272d9b22933",
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "require": {
+                "ext-exif": "*",
+                "ext-json": "*",
+                "ext-mbstring": "*",
+                "league/glide": "^1.6",
+                "php": "^7.2|^8.0",
+                "spatie/image-optimizer": "^1.1",
+                "spatie/temporary-directory": "^1.0|^2.0",
+                "symfony/process": "^3.0|^4.0|^5.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^8.0|^9.0",
+                "symfony/var-dumper": "^4.0|^5.0",
+                "vimeo/psalm": "^4.6"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Spatie\\Image\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Freek Van der Herten",
+                    "email": "freek@spatie.be",
+                    "homepage": "https://spatie.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Manipulate images with an expressive API",
+            "homepage": "https://github.com/spatie/image",
+            "keywords": [
+                "image",
+                "spatie"
+            ],
+            "support": {
+                "issues": "https://github.com/spatie/image/issues",
+                "source": "https://github.com/spatie/image/tree/1.10.5"
+            },
+            "funding": [
+                {
+                    "url": "https://spatie.be/open-source/support-us",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/spatie",
+                    "type": "github"
+                }
+            ],
+            "time": "2021-04-07T08:42:24+00:00"
+        },
+        {
+            "name": "spatie/image-optimizer",
+            "version": "1.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/image-optimizer.git",
+                "reference": "c22202fdd57856ed18a79cfab522653291a6e96a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/image-optimizer/zipball/c22202fdd57856ed18a79cfab522653291a6e96a",
+                "reference": "c22202fdd57856ed18a79cfab522653291a6e96a",
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "require": {
+                "ext-fileinfo": "*",
+                "php": "^7.2|^8.0",
+                "psr/log": "^1.0",
+                "symfony/process": "^4.2|^5.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^8.0|^9.0",
+                "symfony/var-dumper": "^4.2|^5.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Spatie\\ImageOptimizer\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Freek Van der Herten",
+                    "email": "freek@spatie.be",
+                    "homepage": "https://spatie.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Easily optimize images using PHP",
+            "homepage": "https://github.com/spatie/image-optimizer",
+            "keywords": [
+                "image-optimizer",
+                "spatie"
+            ],
+            "support": {
+                "issues": "https://github.com/spatie/image-optimizer/issues",
+                "source": "https://github.com/spatie/image-optimizer/tree/1.4.0"
+            },
+            "time": "2021-04-22T06:17:27+00:00"
+        },
+        {
+            "name": "spatie/laravel-medialibrary",
+            "version": "9.6.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/laravel-medialibrary.git",
+                "reference": "bf4ffa83b1dce3a095b852da4a0ab00b68dd1b5e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/laravel-medialibrary/zipball/bf4ffa83b1dce3a095b852da4a0ab00b68dd1b5e",
+                "reference": "bf4ffa83b1dce3a095b852da4a0ab00b68dd1b5e",
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "require": {
+                "ext-exif": "*",
+                "ext-fileinfo": "*",
+                "ext-json": "*",
+                "illuminate/bus": "^7.0|^8.0",
+                "illuminate/console": "^7.0|^8.0",
+                "illuminate/database": "^7.0|^8.0",
+                "illuminate/pipeline": "^7.0|^8.0",
+                "illuminate/support": "^7.0|^8.0",
+                "league/flysystem": "^1.0.64",
+                "maennchen/zipstream-php": "^1.0|^2.0",
+                "php": "^7.4|^8.0",
+                "spatie/image": "^1.4.0",
+                "spatie/temporary-directory": "^1.1|^2.0",
+                "symfony/console": "^4.4|^5.0"
+            },
+            "conflict": {
+                "php-ffmpeg/php-ffmpeg": "<0.6.1"
+            },
+            "require-dev": {
+                "aws/aws-sdk-php": "^3.133.11",
+                "doctrine/dbal": "^2.5.2",
+                "ext-pdo_sqlite": "*",
+                "ext-zip": "*",
+                "guzzlehttp/guzzle": "^6.3|^7.0",
+                "league/flysystem-aws-s3-v3": "^1.0.23",
+                "mockery/mockery": "^1.3",
+                "orchestra/testbench": "^5.0|^6.0",
+                "phpunit/phpunit": "^9.1",
+                "spatie/pdf-to-image": "^2.0",
+                "spatie/phpunit-snapshot-assertions": "^4.0"
+            },
+            "suggest": {
+                "league/flysystem-aws-s3-v3": "Required to use AWS S3 file storage",
+                "php-ffmpeg/php-ffmpeg": "Required for generating video thumbnails",
+                "spatie/pdf-to-image": "Required for generating thumbsnails of PDFs and SVGs"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Spatie\\MediaLibrary\\MediaLibraryServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spatie\\MediaLibrary\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Freek Van der Herten",
+                    "email": "freek@spatie.be",
+                    "homepage": "https://spatie.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Associate files with Eloquent models",
+            "homepage": "https://github.com/spatie/laravel-medialibrary",
+            "keywords": [
+                "cms",
+                "conversion",
+                "downloads",
+                "images",
+                "laravel",
+                "laravel-medialibrary",
+                "media",
+                "spatie"
+            ],
+            "support": {
+                "issues": "https://github.com/spatie/laravel-medialibrary/issues",
+                "source": "https://github.com/spatie/laravel-medialibrary/tree/9.6.4"
+            },
+            "funding": [
+                {
+                    "url": "https://spatie.be/open-source/support-us",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/spatie",
+                    "type": "github"
+                }
+            ],
+            "time": "2021-06-23T19:42:07+00:00"
+        },
+        {
             "name": "spatie/laravel-permission",
             "version": "4.2.0",
             "source": {
@@ -3872,6 +4247,63 @@
                 }
             ],
             "time": "2021-06-04T23:47:08+00:00"
+        },
+        {
+            "name": "spatie/temporary-directory",
+            "version": "1.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/temporary-directory.git",
+                "reference": "f517729b3793bca58f847c5fd383ec16f03ffec6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/temporary-directory/zipball/f517729b3793bca58f847c5fd383ec16f03ffec6",
+                "reference": "f517729b3793bca58f847c5fd383ec16f03ffec6",
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "require": {
+                "php": "^7.2|^8.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^8.0|^9.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Spatie\\TemporaryDirectory\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Alex Vanderbist",
+                    "email": "alex@spatie.be",
+                    "homepage": "https://spatie.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Easily create, use and destroy temporary directories",
+            "homepage": "https://github.com/spatie/temporary-directory",
+            "keywords": [
+                "php",
+                "spatie",
+                "temporary-directory"
+            ],
+            "support": {
+                "issues": "https://github.com/spatie/temporary-directory/issues",
+                "source": "https://github.com/spatie/temporary-directory/tree/1.3.0"
+            },
+            "time": "2020-11-09T15:54:21+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -9448,5 +9880,5 @@
         "php": "^7.3|^8.0"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.0.0"
+    "plugin-api-version": "2.1.0"
 }
