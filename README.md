@@ -11,3 +11,11 @@
 新建模块
 
 `php artisan module:make Blog`
+
+生成 `IDE Helper` 文件
+
+```
+php artisan ide-helper:generate
+php artisan ide-helper:models
+php artisan ide-helper:meta
+```
