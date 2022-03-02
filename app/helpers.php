@@ -35,14 +35,24 @@ if (!function_exists('error')) {
    *
    * @param int|string $code
    * @param string $message
+   * @param mixed $data
    * @return Illuminate\Http\Response
    */
-  function error(int|string $code = 'code.-1', $message = null)
+  function error(int|string $code = 'code.-1', string $message = null, mixed $data = null)
   {
-    return response()->json([
-      'success' => false,
-      'code' => $code,
-      'message' => isset($message) ? $message : __($code),
-    ]);
+    if (isset($data)) {
+      return response()->json([
+        'success' => false,
+        'code' => $code,
+        'message' => isset($message) ? $message : __($code),
+        'data' => $data
+      ]);
+    } else {
+      return response()->json([
+        'success' => false,
+        'code' => $code,
+        'message' => isset($message) ? $message : __($code),
+      ]);
+    }
   }
 }
