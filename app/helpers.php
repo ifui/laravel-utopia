@@ -6,16 +6,16 @@ if (!function_exists('success')) {
    *
    * @param mixed $data
    * @param string $code
-   * @return Response
+   * @return Illuminate\Http\Response
    */
-  function success(mixed $data = null, int|string $code = '0')
+  function success(mixed $data = null, int|string $code = 'code.0')
   {
     if (isset($data)) {
 
       return response()->json([
         'success' => true,
         'code' => $code,
-        'message' => __('code.' . $code),
+        'message' => __($code),
         'data' => $data
       ]);
     } else {
@@ -33,16 +33,16 @@ if (!function_exists('error')) {
   /**
    * 返回失败状态
    *
-   * @param string $code
+   * @param int|string $code
    * @param string $message
-   * @return Response
+   * @return Illuminate\Http\Response
    */
-  function error(int|string $code = '-1', $message = null)
+  function error(int|string $code = 'code.-1', $message = null)
   {
     return response()->json([
       'success' => false,
       'code' => $code,
-      'message' => isset($message) ? $message : __('code.' . $code),
+      'message' => isset($message) ? $message : __($code),
     ]);
   }
 }
