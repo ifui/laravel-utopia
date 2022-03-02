@@ -72,12 +72,12 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'database',
-            'model' => 'users',
+            'table' => 'users',
         ],
 
         'admin_users' => [
             'driver' => 'database',
-            'table' => 'users',
+            'table' => 'admin_users',
         ],
     ],
 
