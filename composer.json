@@ -13,7 +13,8 @@
         "laravel/framework": "^9.2",
         "laravel/sanctum": "^2.14.1",
         "laravel/tinker": "^2.7",
-        "nwidart/laravel-modules": "^9.0"
+        "nwidart/laravel-modules": "^9.0",
+        "overtrue/laravel-lang": "~6.0"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.12",
@@ -32,7 +33,10 @@
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/",
             "Modules\\": "Modules/"
-        }
+        },
+        "files": [
+            "app/helpers.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {
