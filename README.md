@@ -19,3 +19,7 @@ php artisan ide-helper:generate
 php artisan ide-helper:models
 php artisan ide-helper:meta
 ```
+
+## 注意
+
+.env 文件中的 `SESSION_DOMAIN` 应配置为前端文件站点
