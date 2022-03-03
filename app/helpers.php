@@ -56,3 +56,36 @@ if (!function_exists('error')) {
     }
   }
 }
+
+if (!function_exists('result')) {
+  /**
+   * 自动判断返回结果
+   *
+   * @param mixed $data
+   * @param integer $code
+   * @return void
+   */
+  function result(mixed $data, int|string $code = '0')
+  {
+    if (isset($data)) {
+
+      return response()->json([
+        'success' => true,
+        'code' => $code,
+        'message' => __($code),
+        'data' => $data
+      ]);
+    } else {
+
+      if ($code = '0') {
+        $code = '-1';
+      }
+
+      return response()->json([
+        'success' => false,
+        'code' => $code,
+        'message' => __($code),
+      ]);
+    }
+  }
+}

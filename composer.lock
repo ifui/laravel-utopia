@@ -961,16 +961,16 @@
         },
         {
             "name": "laravel-lang/lang",
-            "version": "9.1.2",
+            "version": "10.4.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Laravel-Lang/lang.git",
-                "reference": "8c5cc7a493af27e175a9f1b7f5c2242bb9faec87"
+                "reference": "f7e71c467c0089575017c27288664f4c1d1c7870"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Laravel-Lang/lang/zipball/8c5cc7a493af27e175a9f1b7f5c2242bb9faec87",
-                "reference": "8c5cc7a493af27e175a9f1b7f5c2242bb9faec87",
+                "url": "https://api.github.com/repos/Laravel-Lang/lang/zipball/f7e71c467c0089575017c27288664f4c1d1c7870",
+                "reference": "f7e71c467c0089575017c27288664f4c1d1c7870",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -982,21 +982,36 @@
             "require": {
                 "ext-json": "*"
             },
+            "conflict": {
+                "laravel-lang/publisher": "<12.0"
+            },
             "require-dev": {
-                "andrey-helldar/pretty-array": "^2.3",
-                "andrey-helldar/support": "^3.6",
+                "dragon-code/pretty-array": "^3.0",
+                "dragon-code/support": "^5.6",
                 "guzzlehttp/guzzle": "^7.3",
+                "laravel-lang/publisher": "^12.1",
+                "laravel/breeze": "^1.2",
+                "laravel/fortify": "^1.7",
+                "laravel/jetstream": "^2.3",
+                "laravel/ui": "^3.4",
+                "orchestra/testbench": "^5.0 || ^6.0 || ^7.0",
                 "php": "^8.0",
                 "phpunit/phpunit": "^9.5",
-                "symfony/var-dumper": "^5.2",
-                "vlucas/phpdotenv": "^5.3"
+                "symfony/finder": "^5.2 || ^6.0",
+                "symfony/var-dumper": "^5.2 || ^6.0",
+                "vlucas/phpdotenv": "^5.4.1"
             },
             "suggest": {
-                "andrey-helldar/laravel-lang-publisher": "Easy installation and update of translation files for your project",
                 "arcanedev/laravel-lang": "Translations manager and checker for Laravel 5",
+                "laravel-lang/publisher": "Easy installation and update of translation files for your project",
                 "overtrue/laravel-lang": "Command to add languages in your project"
             },
             "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "LaravelLang\\Lang\\": "src"
+                }
+            },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
@@ -1018,20 +1033,26 @@
                 "issues": "https://github.com/Laravel-Lang/lang/issues",
                 "source": "https://github.com/Laravel-Lang/lang"
             },
-            "time": "2021-05-14T21:25:59+00:00"
+            "funding": [
+                {
+                    "url": "https://opencollective.com/laravel-lang",
+                    "type": "open_collective"
+                }
+            ],
+            "time": "2022-03-02T12:01:02+00:00"
         },
         {
             "name": "laravel/framework",
-            "version": "v9.2.0",
+            "version": "v9.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "13372872bed31ae75df8709b9de5cde01d50646e"
+                "reference": "d442195be0c1a95324522d733e2369e406db51d1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/13372872bed31ae75df8709b9de5cde01d50646e",
-                "reference": "13372872bed31ae75df8709b9de5cde01d50646e",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/d442195be0c1a95324522d733e2369e406db51d1",
+                "reference": "d442195be0c1a95324522d733e2369e406db51d1",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -1203,7 +1224,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2022-02-22T15:30:23+00:00"
+            "time": "2022-03-02T14:37:13+00:00"
         },
         {
             "name": "laravel/sanctum",
@@ -2287,16 +2308,16 @@
         },
         {
             "name": "overtrue/laravel-lang",
-            "version": "6.0.1",
+            "version": "6.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/overtrue/laravel-lang.git",
-                "reference": "460cdec924279879b11dd24ff7c4d56d2a25b1ba"
+                "reference": "8c7a16495a63d2b97f6c73ea7e2ac7f1d3a28d9a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/overtrue/laravel-lang/zipball/460cdec924279879b11dd24ff7c4d56d2a25b1ba",
-                "reference": "460cdec924279879b11dd24ff7c4d56d2a25b1ba",
+                "url": "https://api.github.com/repos/overtrue/laravel-lang/zipball/8c7a16495a63d2b97f6c73ea7e2ac7f1d3a28d9a",
+                "reference": "8c7a16495a63d2b97f6c73ea7e2ac7f1d3a28d9a",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -2307,7 +2328,7 @@
             },
             "require": {
                 "ext-json": "*",
-                "laravel-lang/lang": "^9.0",
+                "laravel-lang/lang": "^10.4",
                 "symfony/process": "^6.0"
             },
             "require-dev": {
@@ -2346,7 +2367,7 @@
             ],
             "support": {
                 "issues": "https://github.com/overtrue/laravel-lang/issues",
-                "source": "https://github.com/overtrue/laravel-lang/tree/6.0.1"
+                "source": "https://github.com/overtrue/laravel-lang/tree/6.0.2"
             },
             "funding": [
                 {
@@ -2354,7 +2375,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-02-21T08:56:24+00:00"
+            "time": "2022-02-21T08:58:53+00:00"
         },
         {
             "name": "phpoption/phpoption",
@@ -7022,16 +7043,16 @@
         },
         {
             "name": "myclabs/deep-copy",
-            "version": "1.10.2",
+            "version": "1.10.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/myclabs/DeepCopy.git",
-                "reference": "776f831124e9c62e1a2c601ecc52e776d8bb7220"
+                "reference": "c6a951b75d684fd43fbbd69617488e1e2e8924ba"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/myclabs/DeepCopy/zipball/776f831124e9c62e1a2c601ecc52e776d8bb7220",
-                "reference": "776f831124e9c62e1a2c601ecc52e776d8bb7220",
+                "url": "https://api.github.com/repos/myclabs/DeepCopy/zipball/c6a951b75d684fd43fbbd69617488e1e2e8924ba",
+                "reference": "c6a951b75d684fd43fbbd69617488e1e2e8924ba",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -7043,13 +7064,14 @@
             "require": {
                 "php": "^7.1 || ^8.0"
             },
-            "replace": {
-                "myclabs/deep-copy": "self.version"
+            "conflict": {
+                "doctrine/collections": "<1.6.8",
+                "doctrine/common": "<2.13.3 || >=3,<3.2.2"
             },
             "require-dev": {
-                "doctrine/collections": "^1.0",
-                "doctrine/common": "^2.6",
-                "phpunit/phpunit": "^7.1"
+                "doctrine/collections": "^1.6.8",
+                "doctrine/common": "^2.13.3 || ^3.2.2",
+                "phpunit/phpunit": "^7.5.20 || ^8.5.23 || ^9.5.13"
             },
             "type": "library",
             "autoload": {
@@ -7074,7 +7096,7 @@
             ],
             "support": {
                 "issues": "https://github.com/myclabs/DeepCopy/issues",
-                "source": "https://github.com/myclabs/DeepCopy/tree/1.10.2"
+                "source": "https://github.com/myclabs/DeepCopy/tree/1.10.3"
             },
             "funding": [
                 {
@@ -7082,7 +7104,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-11-13T09:40:50+00:00"
+            "time": "2022-03-02T14:16:47+00:00"
         },
         {
             "name": "nunomaduro/collision",
