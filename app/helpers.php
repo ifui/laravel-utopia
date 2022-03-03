@@ -65,7 +65,7 @@ if (!function_exists('result')) {
    * @param integer $code
    * @return void
    */
-  function result(mixed $data, int|string $code = '0')
+  function result(mixed $data, int|string $code = 'code.0')
   {
     if (isset($data)) {
 
@@ -77,8 +77,8 @@ if (!function_exists('result')) {
       ]);
     } else {
 
-      if ($code = '0') {
-        $code = '-1';
+      if ($code == 'code.0') {
+        $code == 'code.-1';
       }
 
       return response()->json([

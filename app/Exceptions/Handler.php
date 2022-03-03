@@ -124,6 +124,6 @@ class Handler extends ExceptionHandler
     {
         $message = $e->getMessage() ? __($e->getMessage()) : __('code.10400');
 
-        return error('code.10400', $message);
+        return error('code.10400', $message, $this->convertExceptionToArray($e));
     }
 }
