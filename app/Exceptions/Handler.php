@@ -8,6 +8,7 @@ use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Router;
 use Illuminate\Validation\ValidationException;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Throwable;
 
@@ -72,6 +73,7 @@ class Handler extends ExceptionHandler
 
         return match (true) {
             $e instanceof AuthenticationException => $this->unauthenticated($request, $e),
+            $e instanceof AccessDeniedHttpException => $this->unauthenticated($request, $e),
             $e instanceof ValidationException => $this->convertValidationExceptionToResponse($e, $request),
             $e instanceof NotFoundHttpException => $this->notFoundHttp($request),
             default => $this->renderExceptionResponse($request, $e),
