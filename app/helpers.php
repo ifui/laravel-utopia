@@ -1,5 +1,8 @@
 <?php
 
+use function PHPUnit\Framework\isEmpty;
+use function PHPUnit\Framework\isNull;
+
 if (!function_exists('success')) {
   /**
    * 返回成功状态
@@ -67,7 +70,7 @@ if (!function_exists('result')) {
    */
   function result(mixed $data, int|string $code = 'code.0')
   {
-    if (isset($data)) {
+    if (isset($data) && (bool) $data) {
 
       return response()->json([
         'success' => true,
@@ -78,13 +81,39 @@ if (!function_exists('result')) {
     } else {
 
       if ($code == 'code.0') {
-        $code == 'code.-1';
+        $code = 'code.-1';
       }
 
       return response()->json([
         'success' => false,
         'code' => $code,
         'message' => __($code),
+      ]);
+    }
+  }
+}
+
+if (!function_exists('resultStatus')) {
+  /**
+   * 自动判断返回结果，简单返回状态
+   *
+   * @param mixed $data
+   * @param integer $code
+   * @return void
+   */
+  function resultStatus(mixed $data)
+  {
+    if (isset($data) && (bool) $data) {
+      return response()->json([
+        'success' => true,
+        'code' => 'code.0',
+        'message' => __('code.0'),
+      ]);
+    } else {
+      return response()->json([
+        'success' => false,
+        'code' => 'code.-1',
+        'message' => __('code.-1'),
       ]);
     }
   }
