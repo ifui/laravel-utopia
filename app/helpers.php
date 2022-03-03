@@ -45,7 +45,7 @@ if (!function_exists('error')) {
         'success' => false,
         'code' => $code,
         'message' => isset($message) ? $message : __($code),
-        'data' => $data
+        'error_data' => $data
       ]);
     } else {
       return response()->json([
