@@ -23,3 +23,5 @@ php artisan ide-helper:meta
 ## 注意
 
 .env 文件中的 `SESSION_DOMAIN` 应配置为前端文件站点
+
+安装拓展包或者对进行拓展包依赖按照的时候，请使用 `composer update` 合并 `composer.json` 配置
