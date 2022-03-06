@@ -76,6 +76,7 @@ class Handler extends ExceptionHandler
             $e instanceof AccessDeniedHttpException => $this->unauthenticated($request, $e),
             $e instanceof ValidationException => $this->convertValidationExceptionToResponse($e, $request),
             $e instanceof NotFoundHttpException => $this->notFoundHttp($request),
+            $e instanceof CodeException => $this->renderCodeExceptionResponse($e),
             default => $this->renderExceptionResponse($request, $e),
         };
     }
@@ -127,5 +128,18 @@ class Handler extends ExceptionHandler
         $message = $e->getMessage() ? __($e->getMessage()) : __('code.10400');
 
         return error('code.10400', $message, $this->convertExceptionToArray($e));
+    }
+
+    /**
+     * 状态码错误异常返回方式
+     *
+     * @param Throwable $e
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    protected function renderCodeExceptionResponse(Throwable $e)
+    {
+        $code = $e->getMessage() ? $e->getMessage() : 'code.10400';
+
+        return error($code, __($code));
     }
 }
