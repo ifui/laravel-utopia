@@ -30,7 +30,7 @@ class AppServiceProvider extends ServiceProvider
             if ($user->hasRole('super-admin')) {
                 return true;
             }
-            if ($user->hasAnyPermission(['administrator'])) {
+            if ($user->hasPermissionTo('administrator')) {
                 return true;
             }
             return null;
