@@ -73,7 +73,7 @@ class Handler extends ExceptionHandler
 
         return match (true) {
             $e instanceof AuthenticationException => $this->unauthenticated($request, $e),
-            $e instanceof AccessDeniedHttpException => $this->unauthenticated($request, $e),
+            $e instanceof AccessDeniedHttpException => $this->accessDenied($request, $e),
             $e instanceof ValidationException => $this->convertValidationExceptionToResponse($e, $request),
             $e instanceof NotFoundHttpException => $this->notFoundHttp($request),
             $e instanceof CodeException => $this->renderCodeExceptionResponse($e),
@@ -89,6 +89,18 @@ class Handler extends ExceptionHandler
      * @return void
      */
     protected function unauthenticated($request, $exception)
+    {
+        return error('code.10401');
+    }
+
+    /**
+     * 重写权限不足时的返回信息格式
+     *
+     * @param \Illuminate\Http\Request  $request
+     * @param UnauthorizedException $exception
+     * @return void
+     */
+    protected function accessDenied($request, $exception)
     {
         return error('code.10403', __($exception->getMessage()));
     }
