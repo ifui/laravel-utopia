@@ -2,6 +2,7 @@
 
 namespace App\Rules;
 
+use Faker\Core\Number;
 use Illuminate\Contracts\Validation\Rule;
 
 class Phone implements Rule
@@ -25,7 +26,7 @@ class Phone implements Rule
      */
     public function passes($attribute, $value)
     {
-        if (preg_match('/^1[345789][0-9]{9}$/', $value)) {
+        if (preg_match('/^1[345789][0-9]{9}$/', (int) $value)) {
             return true;
         } else {
             return false;
@@ -39,6 +40,6 @@ class Phone implements Rule
      */
     public function message()
     {
-        return __('Phone Number is wrong, must Be 11 digits.');
+        return __('Phone Number is wrong.');
     }
 }

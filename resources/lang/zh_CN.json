@@ -1,5 +1,6 @@
 {
     "Unauthenticated.": "对不起，您没有该权限",
     "Too Many Attempts.": "您访问的太快了，请稍后再试",
-    "Phone Number is wrong, must Be 11 digits.": "手机号码错误，应当为 11 位数字"
+    "Phone Number is wrong, must Be 11 digits.": "手机号码错误，应当为 11 位数字",
+    "Phone Number is wrong.": "手机号码错误，请检查是否为中国内地手机号"
 }
