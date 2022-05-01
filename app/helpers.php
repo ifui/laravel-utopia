@@ -1,17 +1,16 @@
 <?php
 
-use function PHPUnit\Framework\isEmpty;
-use function PHPUnit\Framework\isNull;
+use Illuminate\Http\JsonResponse;
 
 if (!function_exists('success')) {
   /**
    * 返回成功状态
    *
    * @param mixed $data
-   * @param string $code
-   * @return Illuminate\Http\Response
+   * @param int|string $code
+   * @return JsonResponse
    */
-  function success(mixed $data = null, int|string $code = 'code.0')
+  function success(mixed $data = null, int|string $code = 'code.0'): JsonResponse
   {
     if (isset($data)) {
 
@@ -37,24 +36,24 @@ if (!function_exists('error')) {
    * 返回失败状态
    *
    * @param int|string $code
-   * @param string $message
+   * @param string|null $message
    * @param mixed $data
-   * @return Illuminate\Http\Response
+   * @return JsonResponse
    */
-  function error(int|string $code = 'code.-1', string $message = null, mixed $data = null)
+  function error(int|string $code = 'code.-1', string $message = null, mixed $data = null): JsonResponse
   {
     if (isset($data)) {
       return response()->json([
         'success' => false,
         'code' => $code,
-        'message' => isset($message) ? $message : __($code),
+        'message' => $message ?? __($code),
         'errorData' => $data
       ]);
     } else {
       return response()->json([
         'success' => false,
         'code' => $code,
-        'message' => isset($message) ? $message : __($code),
+        'message' => $message ?? __($code),
       ]);
     }
   }
@@ -65,10 +64,10 @@ if (!function_exists('result')) {
    * 自动判断返回结果
    *
    * @param mixed $data
-   * @param integer $code
-   * @return void
+   * @param int|string $code
+   * @return JsonResponse
    */
-  function result(mixed $data, int|string $code = 'code.0')
+  function result(mixed $data, int|string $code = 'code.0'): JsonResponse
   {
     if (isset($data) && (bool) $data) {
 
@@ -94,14 +93,13 @@ if (!function_exists('result')) {
 }
 
 if (!function_exists('resultStatus')) {
-  /**
-   * 自动判断返回结果，简单返回状态
-   *
-   * @param mixed $data
-   * @param integer $code
-   * @return void
-   */
-  function resultStatus(mixed $data)
+    /**
+     * 自动判断返回结果，简单返回状态
+     *
+     * @param mixed $data
+     * @return JsonResponse
+     */
+  function resultStatus(mixed $data): JsonResponse
   {
     if (isset($data) && (bool) $data) {
       return response()->json([
