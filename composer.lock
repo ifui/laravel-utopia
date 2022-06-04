@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "406a156a0c9ad96644b449e9c41851b9",
+    "content-hash": "21b99fa663f5ae9f5d47aaba791a786d",
     "packages": [
         {
             "name": "adbario/php-dot-notation",
@@ -1837,6 +1837,70 @@
                 }
             ],
             "time": "2021-10-06T17:43:30+00:00"
+        },
+        {
+            "name": "ifui/laravel-plugin",
+            "version": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ifui/laravel-plugin.git",
+                "reference": "4c053a931b720330a705197d2b6d30ad9111c080"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ifui/laravel-plugin/zipball/4c053a931b720330a705197d2b6d30ad9111c080",
+                "reference": "4c053a931b720330a705197d2b6d30ad9111c080",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "~9"
+            },
+            "require-dev": {
+                "orchestra/testbench": "~7",
+                "phpunit/phpunit": "~9.0"
+            },
+            "default-branch": true,
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Ifui\\LaravelPlugin\\LaravelPluginServiceProvider"
+                    ],
+                    "aliases": {
+                        "LaravelPlugin": "Ifui\\LaravelPlugin\\Facades\\LaravelPlugin"
+                    }
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/helpers.php"
+                ],
+                "psr-4": {
+                    "Ifui\\LaravelPlugin\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "ifui",
+                    "email": "ifui@foxmail.com",
+                    "homepage": "https://ifuboy.com"
+                }
+            ],
+            "description": "Laravel Plugin",
+            "homepage": "https://github.com/ifui/laravel-plugin",
+            "keywords": [
+                "LaravelPlugin",
+                "laravel"
+            ],
+            "support": {
+                "issues": "https://github.com/ifui/laravel-plugin/issues",
+                "source": "https://github.com/ifui/laravel-plugin/tree/main"
+            },
+            "time": "2022-06-04T02:49:50+00:00"
         },
         {
             "name": "intervention/image",
@@ -11126,7 +11190,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "ifui/laravel-plugin": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

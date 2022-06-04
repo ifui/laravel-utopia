@@ -11,6 +11,7 @@
         "php": "^8.0.2",
         "doctrine/dbal": "^3.3",
         "guzzlehttp/guzzle": "^7.2",
+        "ifui/laravel-plugin": "dev-main",
         "laravel/framework": "^9.2",
         "laravel/sanctum": "^2.14.1",
         "laravel/telescope": "^4.8",
