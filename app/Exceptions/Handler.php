@@ -5,9 +5,12 @@ namespace App\Exceptions;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Contracts\Support\Responsable;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Router;
+use Illuminate\Validation\UnauthorizedException;
 use Illuminate\Validation\ValidationException;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Throwable;
@@ -49,9 +52,9 @@ class Handler extends ExceptionHandler
     /**
      * Render an exception into an HTTP response.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Throwable  $e
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @param \Illuminate\Http\Request $request
+     * @param \Throwable $e
+     * @return Response
      *
      * @throws \Throwable
      */
@@ -73,7 +76,7 @@ class Handler extends ExceptionHandler
 
         return match (true) {
             $e instanceof AuthenticationException => $this->unauthenticated($request, $e),
-            $e instanceof AccessDeniedHttpException => $this->accessDenied($request, $e),
+            $e instanceof AccessDeniedHttpException, $e instanceof UnauthorizedException => $this->accessDenied($request, $e),
             $e instanceof ValidationException => $this->convertValidationExceptionToResponse($e, $request),
             $e instanceof NotFoundHttpException => $this->notFoundHttp($request),
             $e instanceof CodeException => $this->renderCodeExceptionResponse($e),
@@ -84,9 +87,9 @@ class Handler extends ExceptionHandler
     /**
      * 重写登录状态失效时的返回信息格式
      *
-     * @param \Illuminate\Http\Request  $request
-     * @param UnauthorizedException $exception
-     * @return void
+     * @param \Illuminate\Http\Request $request
+     * @param UnauthorizedException|AuthenticationException $exception
+     * @return JsonResponse
      */
     protected function unauthenticated($request, $exception)
     {
@@ -96,11 +99,11 @@ class Handler extends ExceptionHandler
     /**
      * 重写权限不足时的返回信息格式
      *
-     * @param \Illuminate\Http\Request  $request
-     * @param UnauthorizedException $exception
-     * @return void
+     * @param \Illuminate\Http\Request $request
+     * @param AccessDeniedHttpException $exception
+     * @return JsonResponse
      */
-    protected function accessDenied($request, $exception)
+    protected function accessDenied(Request $request, AccessDeniedHttpException $exception)
     {
         return error('code.10403', __($exception->getMessage()));
     }
@@ -108,20 +111,20 @@ class Handler extends ExceptionHandler
     /**
      * 重写表单验证失败时的返回信息格式
      *
-     * @param ValidationException $exception
-     * @param [type] $request
-     * @return void
+     * @param ValidationException $e
+     * @param \Illuminate\Http\Request $request
+     * @return JsonResponse
      */
-    public function convertValidationExceptionToResponse(ValidationException $exception, $request)
+    public function convertValidationExceptionToResponse(ValidationException $e, $request)
     {
-        return error('code.10422', __($exception->getMessage()), $exception->validator->getMessageBag());
+        return error('code.10422', __($e->getMessage()), $e->validator->getMessageBag());
     }
 
     /**
      * 重写没有找到页面返回信息格式
      *
      * @param \Illuminate\Http\Request $request
-     * @return void
+     * @return JsonResponse
      */
     public function notFoundHttp(Request $request)
     {
@@ -131,9 +134,9 @@ class Handler extends ExceptionHandler
     /**
      * 重写默认错误返回方式
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Throwable  $e
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @param \Illuminate\Http\Request $request
+     * @param \Throwable $e
+     * @return JsonResponse
      */
     protected function renderExceptionResponse($request, Throwable $e)
     {
@@ -146,7 +149,7 @@ class Handler extends ExceptionHandler
      * 状态码错误异常返回方式
      *
      * @param Throwable $e
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return JsonResponse
      */
     protected function renderCodeExceptionResponse(Throwable $e)
     {
