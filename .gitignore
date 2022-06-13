@@ -24,3 +24,4 @@ composer.lock
 dbseed.sh
 public/.user.ini
 /plugins
+/plugin.json
