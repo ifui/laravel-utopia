@@ -25,3 +25,5 @@ dbseed.sh
 public/.user.ini
 /plugins
 /plugin.json
+
+.env.testing
