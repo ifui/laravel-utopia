@@ -20,13 +20,13 @@ class Phone implements Rule
     /**
      * Determine if the validation rule passes.
      *
-     * @param  string  $attribute
-     * @param  mixed  $value
+     * @param string $attribute
+     * @param mixed $value
      * @return bool
      */
     public function passes($attribute, $value)
     {
-        if (preg_match('/^1[345789][0-9]{9}$/', (int) $value)) {
+        if (preg_match('/^1[3456789][0-9]{9}$/', (int)$value)) {
             return true;
         } else {
             return false;
